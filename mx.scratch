@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project>
-<ProjectName>C:\Users\User\Documents\GitHub\blue_basestation\\blue_basestation</ProjectName>
+<ProjectName>D:\Documents\STM\blue_basestation\\blue_basestation</ProjectName>
 <ProjectNature>C</ProjectNature> 
 <CMSIS>..\Drivers\CMSIS</CMSIS>
-<HAL_Driver>C:\Users\User\STM32Cube\Repository\STM32Cube_FW_F1_V1.6.1\Drivers\CMSIS</HAL_Driver>
+<HAL_Driver>C:\Users\Leon\STM32Cube\Repository\STM32Cube_FW_F1_V1.6.1\Drivers\CMSIS</HAL_Driver>
 <Toolchain>SW4STM32</Toolchain>
 <Version>0</Version>
 

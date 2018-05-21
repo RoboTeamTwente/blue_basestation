@@ -61,12 +61,12 @@
 
 #define LD0_Pin GPIO_PIN_13
 #define LD0_GPIO_Port GPIOC
-#define CE_SPI_NRF_Pin GPIO_PIN_1
-#define CE_SPI_NRF_GPIO_Port GPIOA
-#define CSN_SPI_NRF_Pin GPIO_PIN_2
-#define CSN_SPI_NRF_GPIO_Port GPIOA
-#define IRQ_SPI_NRF_Pin GPIO_PIN_3
-#define IRQ_SPI_NRF_GPIO_Port GPIOA
+#define CSN_SPI_NRF_Pin GPIO_PIN_1
+#define CSN_SPI_NRF_GPIO_Port GPIOB
+#define IRQ_SPI_NRF_Pin GPIO_PIN_10
+#define IRQ_SPI_NRF_GPIO_Port GPIOB
+#define CE_SPI_NRF_Pin GPIO_PIN_11
+#define CE_SPI_NRF_GPIO_Port GPIOB
 
 /* ########################## Assert Selection ############################## */
 /**

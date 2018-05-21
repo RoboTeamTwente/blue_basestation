@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=C:/Users/User/Documents/GitHub/blue_basestation/Inc
+HeaderPath=D:/Documents/STM/blue_basestation/Inc
 HeaderFiles=gpio.h;spi.h;usb_device.h;usbd_conf.h;usbd_desc.h;usbd_cdc_if.h;stm32f1xx_it.h;stm32f1xx_hal_conf.h;main.h;
-SourcePath=C:/Users/User/Documents/GitHub/blue_basestation/Src
+SourcePath=D:/Documents/STM/blue_basestation/Src
 SourceFiles=gpio.c;spi.c;usb_device.c;usbd_conf.c;usbd_desc.c;usbd_cdc_if.c;stm32f1xx_it.c;stm32f1xx_hal_msp.c;main.c;
 
 [PreviousLibFiles]
