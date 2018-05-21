@@ -16,6 +16,17 @@
 #define FULLACKPKTLEN 23 //ACK packet with debug fields
 
 /*
+ * describes the bit in the boring pc communication
+ *
+ */
+enum packing_pc_byte{
+	packing_pc_empty 	= 0b01000000,	// if only this bit is set: no ack received
+	packing_pc_ack		= 0b00000001,	// if this bit is set an ack was received
+	packing_pc_batt		= 0b00000010,	// if set battery is low
+	packing_pc_ball		= 0b00000100,	// if set robot has ball
+};
+
+/*
  * A data struct which is easy to work with
  * when accessing variables.
  * It needs to be converted before it can be

@@ -82,14 +82,16 @@ uint8_t sendPacket(uint8_t packet[ROBOPKTLEN+1]){
 }
 
 uint8_t getAndProcessAck(uint8_t idOfLastCalledRobot) {
-	//uint8_t ack_payload[32];
 	uint8_t ack_payload[32];
 	uint8_t payload_length;
 	int8_t returncode = 0;
 	roboAckData receivedRoboAck;
 
-	uint8_t nonack[24] = {0};
-	nonack[1] = (uint8_t) ((idOfLastCalledRobot)<<3); //a
+	uint8_t bits_2_pc = packing_pc_empty;
+	//sprintf(smallStrBuffer, "0\n");
+
+//	uint8_t nonack[24] = {0};
+//	nonack[1] = (uint8_t) ((idOfLastCalledRobot)<<3); //a
 
 	do {
 		returncode = getAck(ack_payload, &payload_length);
@@ -106,37 +108,38 @@ uint8_t getAndProcessAck(uint8_t idOfLastCalledRobot) {
 			TextOut(smallStrBuffer);
 		}
 		TextOut("\n");*/
-		sprintf(smallStrBuffer, "0\n");
-		TextOut(smallStrBuffer);
 
 
 	} else if(returncode == 1) {
 		//we got a regular ACK packet! Let's see..
 		//it it's the expected length, then unpack it to a struct
-/*		if(payload_length >= SHORTACKPKTLEN) {
+		bits_2_pc |= packing_pc_ack;
+		//char * ptr = smallStrBuffer;
+		if(payload_length >= SHORTACKPKTLEN) {
 
 			ackPacketToRoboAckData(ack_payload, payload_length, &receivedRoboAck);
 
 			//writing ACK payload to PC by printing it as HEX values.
 			//Is that the right format?
-
-			sprintf(smallStrBuffer, "%02x", 1);
-			TextOut(smallStrBuffer);
-			for(uint8_t i=1; i < payload_length+1; i++) {
-				sprintf(smallStrBuffer, "%02x", ack_payload[i-1]);
-				TextOut(smallStrBuffer);
+			if(receivedRoboAck.batteryState){
+				bits_2_pc |= packing_pc_batt;
 			}
-			if(payload_length == SHORTACKPKTLEN) {
-				for(uint8_t i=SHORTACKPKTLEN+1; i < 24; i++) {
-					sprintf(smallStrBuffer, "%02x", 0);
-					TextOut(smallStrBuffer);
-				}
+			if(receivedRoboAck.ballSensor){
+				bits_2_pc |= packing_pc_ball;
 			}
+//			ptr += sprintf(ptr, "%02x", 1);
+//			for(uint8_t i=1; i < payload_length+1; i++) {
+//				ptr += sprintf(ptr, "%02x", ack_payload[i-1]);
+//			}
+//			if(payload_length == SHORTACKPKTLEN) {
+//				for(uint8_t i=SHORTACKPKTLEN+1; i < 24; i++) {
+//					ptr += sprintf(ptr, "%02x", 0);
+//				}
+//			}
 		} else {
 			//if the packet wasn't the right length, then ignore it
-		}*/
-		sprintf(smallStrBuffer, "1\n");
-		TextOut(smallStrBuffer);
+		}
+		//ptr += sprintf(ptr, "1\n");
 
 	} else if(returncode == 0) {
 		//delivered, but got an empty ack.
@@ -147,14 +150,15 @@ uint8_t getAndProcessAck(uint8_t idOfLastCalledRobot) {
 			sprintf(smallStrBuffer, "%02x", nonack[i]);
 			TextOut(smallStrBuffer);
 		}*/
-		sprintf(smallStrBuffer, "0\n");
-		TextOut(smallStrBuffer);
-
-
 	} else if(returncode == -3) {
 		//received a regular (non-ack) packet.
 		//just ignore it and don't let the PC know.
 	}
+	memcpy(smallStrBuffer, &bits_2_pc, 1);
+	char * EOT = "\n";
+	memcpy(smallStrBuffer + 1, EOT, 2);
+	TextOut(smallStrBuffer);
+
 	clearInterrupts();
 
 	return 0;
