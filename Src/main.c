@@ -191,9 +191,9 @@ int main(void)
   {
 
 		if(HAL_GetTick()% 1000 < 500){
-			HAL_GPIO_WritePin(LD0_GPIO_Port,LD0_Pin, 1);
+//			HAL_GPIO_WritePin(LD0_GPIO_Port,LD0_Pin, 1);
 		}else {
-			HAL_GPIO_WritePin(LD0_GPIO_Port,LD0_Pin, 0);
+//			HAL_GPIO_WritePin(LD0_GPIO_Port,LD0_Pin, 0);
 		}
 		//dummyTestLoop();
 		if(usbLength == ROBOPKTLEN){
