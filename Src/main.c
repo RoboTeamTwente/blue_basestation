@@ -101,7 +101,6 @@ void tacticsCommTestLoop() {
 	debugRoboData.cam_position_x = 1;
 	debugRoboData.cam_position_y = 2;
 	debugRoboData.cam_rotation = 3;*/
-	sprintf(smallStrBuffer,"id: %i\n",debugRoboData.id);
 	robotDataToPacket(&debugRoboData, debugRoboPacket);
 	sendPacket(debugRoboPacket);
 
@@ -135,7 +134,6 @@ void dummyTestLoop() {
 	debugRoboData.cam_position_x = 1;
 	debugRoboData.cam_position_y = 2;
 	debugRoboData.cam_rotation = 3;
-	sprintf(smallStrBuffer,"id: %i\n",debugRoboData.id);
 	robotDataToPacket(&debugRoboData, debugRoboPacket);
 	sendPacket(debugRoboPacket);
 
