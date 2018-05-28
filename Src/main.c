@@ -176,14 +176,18 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_USB_DEVICE_Init();
+  //MX_USB_DEVICE_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
+
   if(HAL_GPIO_ReadPin(SW_freqband_GPIO_Port,SW_freqband_Pin)){
 	  initBase(&hspi1, 78);
+	  memcpy(freq_str, "078", 3);
   }else{
 	  initBase(&hspi1, 80);
+	  memcpy(freq_str, "080", 3);
   }
+  MX_USB_DEVICE_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */

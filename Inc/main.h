@@ -78,7 +78,7 @@
 /* #define USE_FULL_ASSERT    1U */
 
 /* USER CODE BEGIN Private defines */
-
+char freq_str[3];
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
