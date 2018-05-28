@@ -68,6 +68,7 @@
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+uint8_t debugRoboPacket[ROBOPKTLEN];
 
 /* USER CODE END PV */
 
@@ -81,10 +82,9 @@ void SystemClock_Config(void);
 
 /* USER CODE BEGIN 0 */
 void tacticsCommTestLoop() {
-	roboData debugRoboData;
-	uint8_t debugRoboPacket[ROBOPKTLEN];
+	//roboData debugRoboData;
 
-	packetToRoboData(usbData, &debugRoboData);
+	//packetToRoboData(usbData, &debugRoboData);
 /*	debugRoboData.id = 10; //robot 10
 	debugRoboData.rho = 1;
 	debugRoboData.theta = 2;
@@ -101,7 +101,7 @@ void tacticsCommTestLoop() {
 	debugRoboData.cam_position_x = 1;
 	debugRoboData.cam_position_y = 2;
 	debugRoboData.cam_rotation = 3;*/
-	robotDataToPacket(&debugRoboData, debugRoboPacket);
+	//robotDataToPacket(&debugRoboData, debugRoboPacket);
 	sendPacket(debugRoboPacket);
 
 	//we need to know to which Robot the PC wanted to send.
@@ -179,7 +179,11 @@ int main(void)
   MX_USB_DEVICE_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-	initBase(&hspi1, 78);
+  if(HAL_GPIO_ReadPin(SW_freqband_GPIO_Port,SW_freqband_Pin)){
+	  initBase(&hspi1, 78);
+  }else{
+	  initBase(&hspi1, 80);
+  }
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -195,6 +199,7 @@ int main(void)
 		}
 		//dummyTestLoop();
 		if(usbLength == ROBOPKTLEN){
+			memcpy(debugRoboPacket, usbData,ROBOPKTLEN);
 			tacticsCommTestLoop();
 			usbLength = 0;
 		}

@@ -29,7 +29,9 @@ void initBase(SPI_HandleTypeDef* spiHandle24, uint8_t freqChannel){
 	writeReg(CONFIG, config_reg);
 
 
-	setFreqChannel(freqChannel);
+	if(setFreqChannel(freqChannel) == -1){
+		HAL_GPIO_WritePin(LD0_GPIO_Port,LD0_Pin, 0);
+	}
 	//setLowSpeed();
 	//the default value of RF_SETUP sets the module to 2 Mbps
 

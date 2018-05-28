@@ -67,6 +67,8 @@
 #define IRQ_SPI_NRF_GPIO_Port GPIOB
 #define CE_SPI_NRF_Pin GPIO_PIN_11
 #define CE_SPI_NRF_GPIO_Port GPIOB
+#define SW_freqband_Pin GPIO_PIN_9
+#define SW_freqband_GPIO_Port GPIOB
 
 /* ########################## Assert Selection ############################## */
 /**
