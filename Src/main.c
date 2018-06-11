@@ -203,7 +203,7 @@ int main(void)
 		}
 		//dummyTestLoop();
 		if(usbLength == ROBOPKTLEN){
-			//memcpy(debugRoboPacket, usbData,ROBOPKTLEN);
+			memcpy(debugRoboPacket, usbData,ROBOPKTLEN);
 			tacticsCommTestLoop();
 			usbLength = 0;
 		}
