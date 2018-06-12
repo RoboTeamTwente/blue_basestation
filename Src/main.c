@@ -202,10 +202,11 @@ int main(void)
 //			HAL_GPIO_WritePin(LD0_GPIO_Port,LD0_Pin, 0);
 		}
 		//dummyTestLoop();
-		if(usbLength == ROBOPKTLEN){
+		if(usbLength >= ROBOPKTLEN){
 			memcpy(debugRoboPacket, usbData,ROBOPKTLEN);
 			tacticsCommTestLoop();
-			usbLength = 0;
+			usbLength -= ROBOPKTLEN;
+			memmove(usbData, usbData + ROBOPKTLEN, 64 - ROBOPKTLEN);
 		}
   /* USER CODE END WHILE */
 

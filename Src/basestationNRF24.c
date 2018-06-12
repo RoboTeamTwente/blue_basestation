@@ -42,7 +42,7 @@ void initBase(SPI_HandleTypeDef* spiHandle24, uint8_t freqChannel){
 
 	//auto-ack settings
 	uint8_t arc=0; //auto-retransmit count
-	uint8_t ard=0b111; //auto-retransmit delay
+	uint8_t ard=0b010; //auto-retransmit delay
 	writeReg(SETUP_RETR, (ard<<4)|(arc&0b1111));
 
 	//enable dynamic packet length, ack payload, dynamic acks
@@ -156,10 +156,10 @@ uint8_t getAndProcessAck(uint8_t idOfLastCalledRobot) {
 		//received a regular (non-ack) packet.
 		//just ignore it and don't let the PC know.
 	}
-	memcpy(smallStrBuffer, &bits_2_pc, 1);
-	char * EOT = "\n";
-	memcpy(smallStrBuffer + 1, EOT, 2);
-	TextOut(smallStrBuffer);
+//	memcpy(smallStrBuffer, &bits_2_pc, 1);
+//	char * EOT = "\n";
+//	memcpy(smallStrBuffer + 1, EOT, 2);
+//	TextOut(smallStrBuffer);
 
 	clearInterrupts();
 
