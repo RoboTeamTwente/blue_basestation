@@ -120,7 +120,7 @@ extern USBD_CDC_ItfTypeDef USBD_Interface_fops_FS;
 
 /* USER CODE BEGIN EXPORTED_VARIABLES */
 extern int usbLength;
-extern uint8_t usbData[64];
+extern uint8_t usbData[130];
 
 /* USER CODE END EXPORTED_VARIABLES */
 

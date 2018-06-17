@@ -181,7 +181,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   if(HAL_GPIO_ReadPin(SW_freqband_GPIO_Port,SW_freqband_Pin)){
-	  initBase(&hspi1, 78);
+	  initBase(&hspi1, 103);
 	  memcpy(freq_str, "078", 3);
   }else{
 	  initBase(&hspi1, 80);
@@ -206,7 +206,11 @@ int main(void)
 			memcpy(debugRoboPacket, usbData,ROBOPKTLEN);
 			tacticsCommTestLoop();
 			usbLength -= ROBOPKTLEN;
-			memmove(usbData, usbData + ROBOPKTLEN, 64 - ROBOPKTLEN);
+			if(usbLength < ROBOPKTLEN){
+				usbLength = 0;
+			}else{
+				memmove(usbData, usbData + ROBOPKTLEN, 256 - ROBOPKTLEN);
+			}
 		}
   /* USER CODE END WHILE */
 
